@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>TO-DO LIST</h2>
+        <div class="sub-container">
+            <input type="text" id="note-text" placeholder="New task" onkeyup="addItemByEnter(event)">
+            <button id="add-btn" onclick="addItemByClick()">ADD</button>
+        </div>
+        <div class="sub-container">
+            <ul id="list"></ul>
+        </div>
+    </div>
+    
+    <script>
+        function addItemByClick(){
+            const textNote = document.getElementById("note-text");
+            addItem(textNote.value);
+            textNote.value = "";
+        }
+
+        function addItemByEnter(event){
+            if(event.key == "Enter"){
+                const textNote = event.target.value;
+                addItem(textNote);
+                event.target.value = "";
+            }
+        }
+
+        function addItem(textNote){
+            const list = document.getElementById("list");
+            const item = document.createElement("li");
+            item.classList.add('note');
+            item.setAttribute("onclick","removeItem(event);");
+
+            const text = document.createTextNode(textNote);
+            item.appendChild(text);
+            list.appendChild(item);
+        }
+        
+        function removeItem(e){
+            const item = e.target;
+            item.remove();
+
+        }
+    </script>
+</body>
+</html>
